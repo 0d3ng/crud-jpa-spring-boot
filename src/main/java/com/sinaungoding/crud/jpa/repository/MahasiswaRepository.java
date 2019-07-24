@@ -15,5 +15,8 @@ package com.sinaungoding.crud.jpa.repository;
 import com.sinaungoding.crud.jpa.entitas.Mahasiswa;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface MahasiswaRepository extends CrudRepository<Mahasiswa, String> {
+    public List<Mahasiswa> findByNamaContaining(String nama);
 }

@@ -26,21 +26,30 @@ public class JpaApplicationTests {
     @Ignore
     public void insertTest() {
         Mahasiswa mahasiswa = new Mahasiswa();
-        mahasiswa.setNim("075410099");
-        mahasiswa.setNama("Noprianto");
-        mahasiswa.setIpk(3.99F);
-        mahasiswa.setJurusan("Teknolog Informasi");
+        mahasiswa.setNim("075410100");
+        mahasiswa.setNama("Singgih Kuncoro");
+        mahasiswa.setIpk(3.50F);
+        mahasiswa.setJurusan("Manajemen Informasi");
         Mahasiswa save = mahasiswaRepository.save(mahasiswa);
+        assertNotNull(save);
+        mahasiswa = new Mahasiswa();
+        mahasiswa.setNim("075410101");
+        mahasiswa.setNama("Singgih Permana");
+        mahasiswa.setIpk(3.54F);
+        mahasiswa.setJurusan("Teknologi Informasi");
+        save = mahasiswaRepository.save(mahasiswa);
         assertNotNull(save);
     }
 
     @Test
+    @Ignore
     public void getMahasiswaByNimTest() {
         Mahasiswa mhs = mahasiswaRepository.findById("075410099").get();
         assertNotNull(mhs);
     }
 
     @Test
+    @Ignore
     public void getAllMahasiswaTest() {
         Iterable<Mahasiswa> mahasiswas = mahasiswaRepository.findAll();
         List<Mahasiswa> list = new ArrayList<>();
@@ -48,6 +57,12 @@ public class JpaApplicationTests {
             list.add(mahasiswa);
         }
         assertTrue(!list.isEmpty());
+    }
+
+    @Test
+    public void getMahasiswaByNamaLike() {
+        List<Mahasiswa> mahasiswas = mahasiswaRepository.findByNamaContaining("Singgih");
+        assertTrue(!mahasiswas.isEmpty());
     }
 
 }
